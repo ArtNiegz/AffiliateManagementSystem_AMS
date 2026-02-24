@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Settings - KU Admin</title>
+    <link rel="icon" type="image/png" href="../../frontend/images/KUlogo.jpg">
+    <link rel="stylesheet" href="../../frontend/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../frontend/js/admin.js"></script>   
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="sidebar-logo-icon"><img src="../../frontend/images/KUlogo.jpg" alt="KU Logo"></div>
+        <div class="logo-text"><h1>KU ADMIN</h1><p>Kusina University</p></div>
+    </div>
+    <div class="sidebar-user">
+        <div class="sidebar-user-avatar">AD</div>
+        <div class="user-info-text"><p>Admin User</p><p>Administrator</p></div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="../../frontend/admin/admin-dashboard.html"   class="nav-item"><i class="fas fa-th-large"></i><span class="nav-label">Dashboard</span></a>
+        <a href="../../frontend/admin/admin-affiliates.html"  class="nav-item"><i class="fas fa-users"></i><span class="nav-label">Affiliates</span></a>
+        <a href="../../frontend/admin/admin-links.html"       class="nav-item"><i class="fas fa-link"></i><span class="nav-label">Links</span></a>
+        <a href="../../frontend/admin/admin-payouts.html"     class="nav-item"><i class="fas fa-credit-card"></i><span class="nav-label">Payouts</span></a>
+        <a href="../../frontend/admin/admin-analytics.html"   class="nav-item"><i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span></a>
+          <a href="../../frontend/admin/admin-promocodes.html" class="nav-item active"><i class="fas fa-ticket-alt"></i><span class="nav-label">Promo Codes</span></a>      
+        <div class="sidebar-section-label" style="margin-top:8px;">Settings</div>
+        <a href="../../frontend/admin/admin-profile.html" class="nav-item"><i class="fas fa-user-circle"></i><span class="nav-label">Profile</span></a>
+        <a href="../../frontend/admin/admin-comsettings.html" class="nav-item"><i class="fas fa-cog"></i><span class="nav-label">Commission Settings</span></a>
+
+    </nav>
+    <div class="sidebar-footer">
+        <a href="../../frontend/admin/admin-login.html" class="nav-item" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i><span class="nav-label">Logout</span></a>
+    </div>
+</aside>
+
+<div class="main-content" id="mainContent">
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="topbar-icon-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <div class="topbar-title">
+                <h2>Promo Codes</h2>
+                <p>Manage all generated promo codes</p>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <div style="position:relative;" id="notifContainer"></div>
+            <div style="position:relative;" id="profileDropdownContainer">
+                <button class="topbar-profile-btn" onclick="toggleProfileDropdown()">
+                    <div class="topbar-avatar">AD</div>
+                    <div class="topbar-user-info hidden sm:block"><p>Admin User</p><p>Administrator</p></div>
+                    <i class="fas fa-chevron-down" style="font-size:11px;color:var(--text-muted);"></i>
+                </button>
+                <div class="dropdown-menu" id="profileDropdown">
+                    <a href="admin-profile.html" class="dropdown-item"><i class="fas fa-user"></i>Profile</a>            
+                    <div class="dropdown-item"><i class="fas fa-cog"></i> Settings</div>
+                    <hr style="margin:4px 0;border-color:var(--border);">
+                    <div class="dropdown-item" style="color:#dc2626;" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                </div>
+            </div>
+        </div>
+    </header>
+<body>
+
+
+<div class="page-body">
+
+<div class="page-header">
+    <div class="page-header-text">
+        <h1>Promo Codes</h1>
+        <p>All generated promo campaigns</p>
+    </div>
+</div>
+
+<!-- STAT CARDS -->
+<div class="grid-3 mb-6">
+
+    <!-- Total Promo Codes -->
+    <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-ticket"></i></div>
+        <div class="stat-label">Total Promo Codes</div>
+        <div class="stat-value" id="totalPromos">0</div>
+    </div>
+
+    <!-- Active Promos -->
+    <div class="stat-card">
+        <div class="stat-icon light"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-label">Active Promos</div>
+        <div class="stat-value" id="activePromos">0</div>
+    </div>
+
+    <!-- Expired Promos -->
+    <div class="stat-card">
+        <div class="stat-icon gold"><i class="fas fa-clock"></i></div>
+        <div class="stat-label">Expired Promos</div>
+        <div class="stat-value" id="expiredPromos">0</div>
+    </div>
+
+</div>
+
+<!-- TABLE -->
+<div class="card card-p">
+<div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+    
+    <div class="section-title mb-0">Generated Promo Codes</div>
+
+    <div class="flex gap-3">
+
+        <!-- TYPE FILTER -->
+        <select id="typeFilter"
+            class="form-select w-40">
+            <option value="all">All Types</option>
+            <option value="merchant">Merchant</option>
+            <option value="location">Location</option>
+            <option value="event">Event</option>
+        </select>
+
+        <!-- STATUS FILTER -->
+        <select id="statusFilter"
+            class="form-select w-40">
+            <option value="all">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Expired">Expired</option>
+        </select>
+
+    </div>
+
+</div>
+
+<div class="overflow-x-auto">
+<table class="admin-table">
+<thead>
+<tr>
+<th>Promo Code</th>
+<th>Type</th>
+<th>Target</th>
+<th>Discount</th>
+<th>Usage Limit</th>
+<th>Start</th>
+<th>End</th>
+<th>Status</th>
+
+</tr>
+</thead>
+<tbody id="promoTable"></tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+function loadPromos() {
+    const promos = JSON.parse(localStorage.getItem("ku_promos")) || [];
+
+    const typeFilter = document.getElementById("typeFilter").value;
+    const statusFilter = document.getElementById("statusFilter").value;
+
+    const table = document.getElementById("promoTable");
+    const total = document.getElementById("totalPromos");
+    const active = document.getElementById("activePromos");
+    const expired = document.getElementById("expiredPromos");
+
+    table.innerHTML = "";
+
+    let activeCount = 0;
+    let expiredCount = 0;
+
+    const today = new Date();
+
+    const filteredPromos = promos.filter(promo => {
+
+        const endDate = new Date(promo.endDate);
+        const isActive = today <= endDate;
+        const status = isActive ? "Active" : "Expired";
+
+        const matchType =
+            typeFilter === "all" ||
+            promo.type.toLowerCase() === typeFilter;
+
+        const matchStatus =
+            statusFilter === "all" ||
+            status === statusFilter;
+
+        return matchType && matchStatus;
+    });
+
+    filteredPromos.forEach(promo => {
+
+        const endDate = new Date(promo.endDate);
+        const isActive = today <= endDate;
+
+        let status = "";
+        let badgeClass = "";
+
+        if (isActive) {
+            status = "Active";
+            badgeClass = "badge-active";
+            activeCount++;
+        } else {
+            status = "Expired";
+            badgeClass = "badge-disabled";
+            expiredCount++;
+        }
+
+        table.innerHTML += `
+        <tr>
+            <td><strong>${promo.code}</strong></td>
+            <td>${promo.type}</td>
+            <td>${promo.target}</td>
+            <td>${promo.discountValue} ${promo.discountType === "percentage" ? "%" : "₱"}</td>
+            <td>${promo.usageLimit || "-"}</td>
+            <td>${promo.startDate}</td>
+            <td>${promo.endDate}</td>
+            <td><span class="badge ${badgeClass}">${status}</span></td>
+        </tr>`;
+    });
+
+    total.textContent = filteredPromos.length;
+    active.textContent = activeCount;
+    expired.textContent = expiredCount;
+}
+
+/* Run on page load */
+document.addEventListener("DOMContentLoaded", () => {
+    loadPromos();
+
+    document.getElementById("typeFilter")
+        .addEventListener("change", loadPromos);
+
+    document.getElementById("statusFilter")
+        .addEventListener("change", loadPromos);
+});
+</script>
+
+
+
+</body>
+</html>

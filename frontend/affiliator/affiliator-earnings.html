@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings - KU Affiliate</title>
+    <link rel="icon" type="image/png" href="../../frontend/images/KUlogo.jpg">
+    <link rel="stylesheet" href="../../frontend/css/affiliator.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#590C70', 'primary-light': '#824893', 'primary-dark': '#1e293b',
+                        'primary-darker': '#2e2233', 'primary-gray': '#64748b',
+                        'bg-light': '#F1EEF6', 'bg-soft': '#F4F7FA',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="tooltip" id="tooltip"></div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileSidebar()"></div>
+
+
+    <!-- Notifications Panel -->
+    <div id="notifPanel" class="hidden absolute right-6 top-16 bg-white rounded-2xl shadow-2xl border border-purple-100 w-80 z-50 overflow-hidden">
+        <div class="p-4 border-b border-bg-light flex items-center justify-between">
+            <h4 class="font-bold text-primary-dark text-sm">Notifications</h4>
+            <span class="text-xs text-primary-light cursor-pointer hover:underline">Mark all read</span>
+        </div>
+        <div class="max-h-72 overflow-y-auto">
+            <div class="p-4 hover:bg-bg-soft transition-colors cursor-pointer border-b border-bg-light">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check text-green-600 text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-primary-darker font-medium">New commission earned!</p>
+                        <p class="text-xs text-gray-400 mt-1">You earned ₱450.00 from a referral purchase</p>
+                        <p class="text-[10px] text-gray-300 mt-1">2 hours ago</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 hover:bg-bg-soft transition-colors cursor-pointer border-b border-bg-light">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-link text-blue-600 text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-primary-darker font-medium">Link milestone reached</p>
+                        <p class="text-xs text-gray-400 mt-1">Your Masterclass link hit 500 clicks!</p>
+                        <p class="text-[10px] text-gray-300 mt-1">5 hours ago</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 hover:bg-bg-soft transition-colors cursor-pointer">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-gift text-primary text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-primary-darker font-medium">Bonus unlocked! 🎉</p>
+                        <p class="text-xs text-gray-400 mt-1">You've unlocked a 5% bonus for this month</p>
+                        <p class="text-[10px] text-gray-300 mt-1">1 day ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-3 border-t border-bg-light text-center">
+            <span class="text-xs text-primary font-medium cursor-pointer hover:underline">View all notifications</span>
+        </div>
+    </div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="p-5">
+        <div class="flex items-center gap-3 mb-8">
+            <div class="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                <img src="../../frontend/images/KUlogo.jpg" alt="Kusina University Logo" class="w-full h-full object-contain">
+            </div>
+            <div class="logo-text">
+                <h1 class="text-white font-bold text-base leading-tight">KU AFFILIATE</h1>
+                <p class="text-white/60 text-xs">Kusina University</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3 mb-8 p-3 rounded-xl bg-white/10">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-white/30 to-white/10 flex items-center justify-center flex-shrink-0">
+                <span class="text-white font-semibold text-sm">DS</span>
+            </div>
+            <div class="user-info-text">
+                <p class="text-white text-sm font-medium">Roberto Salis</p>
+                <p class="text-white/50 text-xs">Affiliator</p>
+            </div>
+        </div>
+        <div class="section-label text-white/40 text-[10px] font-semibold uppercase tracking-wider mb-3 px-3">Main Menu</div>
+        <nav class="space-y-1 mb-6">
+            <a href="affiliator-dashboard.html" class="nav-item"><i class="fas fa-th-large"></i><span class="nav-label">Dashboard</span></a>
+            <a href="affiliator-affiliatelinks.html" class="nav-item"><i class="fas fa-link"></i><span class="nav-label">Affiliate Links</span></a>
+              <a href="affiliator-bonus.html" class="nav-item">
+    <i class="fas fa-gift"></i>
+    <span class="nav-label">Bonus Campaign</span>
+</a>           <a href="affiliator-earnings.html" class="nav-item active"><i class="fas fa-coins"></i><span class="nav-label">Earnings</span></a>
+            <a href="affiliator-analytics.html" class="nav-item"><i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span></a>
+        </nav>
+        <div class="section-label text-white/40 text-[10px] font-semibold uppercase tracking-wider mb-3 px-3">Account</div>
+        <nav class="space-y-1">
+            <a href="affiliator-profile.html" class="nav-item"><i class="fas fa-user-circle"></i><span class="nav-label">Profile</span></a>
+            <a href="#" class="nav-item" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i><span class="nav-label">Logout</span></a>
+        </nav>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content" id="mainContent">
+    <header class="topbar px-10 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="w-10 h-10 rounded-xl bg-bg-light hover:bg-primary/10 flex items-center justify-center transition-colors">
+                    <i class="fas fa-bars text-primary"></i>
+                </button>
+                <div class="hidden sm:block">
+                    <h2 class="text-lg font-bold text-primary-dark">Earnings</h2>
+                    <p class="text-xs text-gray-400">Track your revenue and payouts.</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="hidden md:flex items-center bg-bg-soft rounded-xl px-4 py-2.5 gap-2">
+                    <i class="fas fa-search text-gray-400 text-sm"></i>
+                    <input type="text" placeholder="Search..." class="bg-transparent outline-none text-sm w-40 text-primary-darker">
+                </div>
+                <button class="w-10 h-10 rounded-xl bg-bg-soft hover:bg-primary/10 flex items-center justify-center transition-colors relative" onclick="toggleNotifications()">
+                    <i class="fas fa-bell text-primary-light text-sm"></i><span class="notif-badge"></span>
+                </button>
+                <div class="relative">
+                    <button onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-bg-soft rounded-xl px-3 py-2 transition-colors">
+                        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center">
+                            <span class="text-white text-sm font-semibold">DS</span>
+                        </div>
+                        <div class="hidden sm:block text-left">
+                            <p class="text-sm font-semibold text-primary-dark">Roberto Salis</p>
+                            <p class="text-[11px] text-gray-400">RobertoSalis@gmail.com</p>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400 text-xs hidden sm:block"></i>
+                    </button>
+                    <div class="dropdown-menu" id="profileDropdown">
+                        <a href="affiliator-profile.html" class="dropdown-item"><i class="fas fa-user text-primary-light"></i> My Profile</a>
+                        <div class="dropdown-item"><i class="fas fa-cog text-primary-light"></i> Settings</div>
+                        <div class="dropdown-item"><i class="fas fa-question-circle text-primary-light"></i> Help Center</div>
+                        <hr class="my-1 border-bg-light">
+                        <div class="dropdown-item text-red-500" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="px-[70px] py-[30px]">
+        <div class="mb-6">
+            <h3 class="text-xl font-bold text-primary-dark">Earnings</h3>
+            <p class="text-sm text-gray-400">Track your revenue and payouts</p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 stat-cards-grid">
+            <div class="stat-card">
+                <div class="flex items-center gap-3 mb-3"><div class="stat-icon bg-green-50 text-green-500"><i class="fas fa-wallet"></i></div></div>
+                <h3 class="text-2xl font-bold text-primary-dark">₱45,850</h3>
+                <p class="text-xs text-gray-400 mt-1">Total Earned</p>
+            </div>
+            <div class="stat-card">
+                <div class="flex items-center gap-3 mb-3"><div class="stat-icon bg-blue-50 text-blue-500"><i class="fas fa-hand-holding-usd"></i></div></div>
+                <h3 class="text-2xl font-bold text-primary-dark">₱33,350</h3>
+                <p class="text-xs text-gray-400 mt-1">Total Withdrawn</p>
+            </div>
+            <div class="stat-card">
+                <div class="flex items-center gap-3 mb-3"><div class="stat-icon bg-yellow-50 text-yellow-500"><i class="fas fa-clock"></i></div></div>
+                <h3 class="text-2xl font-bold text-primary-dark">₱8,250</h3>
+                <p class="text-xs text-gray-400 mt-1">Pending Payout</p>
+            </div>
+            <div class="stat-card">
+                <div class="flex items-center gap-3 mb-3"><div class="stat-icon bg-purple-50 text-primary"><i class="fas fa-calendar-check"></i></div></div>
+                <h3 class="text-2xl font-bold text-primary-dark">₱4,250</h3>
+                <p class="text-xs text-gray-400 mt-1">Available Balance</p>
+            </div>
+        </div>
+
+        <!-- Earnings Chart — NO display:none issue since this is the whole page -->
+        <div class="chart-container mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="font-bold text-primary-dark">Revenue Breakdown</h3>
+                    <p class="text-xs text-gray-400 mt-1">Monthly earnings by course</p>
+                </div>
+                <select class="profile-field text-sm" style="padding:8px 14px;width:auto;">
+                    <option>Last 6 Months</option>
+                    <option>Last 12 Months</option>
+                    <option>This Year</option>
+                </select>
+            </div>
+            <canvas id="earningsPageChart"></canvas>
+        </div>
+
+        <!-- Payout History -->
+        <div class="chart-container">
+            <h3 class="font-bold text-primary-dark mb-1">Payout History</h3>
+            <p class="text-xs text-gray-400 mb-5">Recent withdrawal transactions</p>
+            <div class="overflow-x-auto">
+                <table class="affiliate-table">
+                    <thead>
+                        <tr><th>Date</th><th>Amount</th><th>Method</th><th>Reference</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jun 15, 2025</td><td class="font-semibold">₱12,500.00</td>
+                            <td><i class="fas fa-mobile-alt text-blue-500 mr-2"></i>GCash</td>
+                            <td><code class="text-xs bg-bg-light px-2 py-1 rounded">PAY-2025-0615</code></td>
+                            <td><span class="status-badge status-active">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jun 01, 2025</td><td class="font-semibold">₱8,350.00</td>
+                            <td><i class="fas fa-university text-green-500 mr-2"></i>Bank Transfer</td>
+                            <td><code class="text-xs bg-bg-light px-2 py-1 rounded">PAY-2025-0601</code></td>
+                            <td><span class="status-badge status-active">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>May 15, 2025</td><td class="font-semibold">₱6,750.00</td>
+                            <td><i class="fas fa-mobile-alt text-blue-500 mr-2"></i>GCash</td>
+                            <td><code class="text-xs bg-bg-light px-2 py-1 rounded">PAY-2025-0515</code></td>
+                            <td><span class="status-badge status-active">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>May 01, 2025</td><td class="font-semibold">₱5,750.00</td>
+                            <td><i class="fas fa-mobile-alt text-blue-500 mr-2"></i>GCash</td>
+                            <td><code class="text-xs bg-bg-light px-2 py-1 rounded">PAY-2025-0501</code></td>
+                            <td><span class="status-badge status-active">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jun 20, 2025</td><td class="font-semibold">₱8,250.00</td>
+                            <td><i class="fas fa-mobile-alt text-blue-500 mr-2"></i>GCash</td>
+                            <td><code class="text-xs bg-bg-light px-2 py-1 rounded">PAY-2025-0620</code></td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="toast" class="fixed bottom-6 right-6 bg-primary-dark text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <i class="fas fa-check-circle text-green-400" id="toastIcon"></i>
+    <span class="text-sm font-medium" id="toastMessage">Success!</span>
+</div>
+  <script src="../../frontend/js/affiliator.js"></script>
+
+</body>
+</html>

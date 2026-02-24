@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile - KU Admin</title>
+    <link rel="icon" type="image/png" href="../../frontend/images/KUlogo.jpg">
+    <link rel="stylesheet" href="../../frontend/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../frontend/js/admin.js"></script>     
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+            <img src="../../frontend/images/KUlogo.jpg" alt="KU Logo">
+        </div>
+        <div class="logo-text">
+            <h1>KU ADMIN</h1>
+            <p>Kusina University</p>
+        </div>
+    </div>
+    <div class="sidebar-user">
+        <div class="sidebar-user-avatar">AD</div>
+        <div class="user-info-text">
+            <p>Admin User</p>
+            <p>Administrator</p>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="../../frontend/admin/admin-dashboard.html"   class="nav-item"><i class="fas fa-th-large"></i><span class="nav-label">Dashboard</span></a>
+        <a href="../../frontend/admin/admin-affiliates.html"  class="nav-item"><i class="fas fa-users"></i><span class="nav-label">Affiliates</span></a>
+        <a href="../../frontend/admin/admin-links.html"       class="nav-item"><i class="fas fa-link"></i><span class="nav-label">Links</span></a>
+        <a href="../../frontend/admin/admin-payouts.html"     class="nav-item"><i class="fas fa-credit-card"></i><span class="nav-label">Payouts</span></a>
+        <a href="../../frontend/admin/admin-analytics.html"   class="nav-item"><i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span></a>
+           <a href="../../frontend/admin/admin-promocodes.html" class="nav-item"><i class="fas fa-ticket-alt"></i><span class="nav-label">Promo Codes</span></a>
+        <div class="sidebar-section-label" style="margin-top:8px;">Settings</div>
+        <a href="../../frontend/admin/admin-profile.html"  class="nav-item active"><i class="fas fa-user-circle"></i><span class="nav-label">Profile</span></a>
+        <a href="../../frontend/admin/admin-comsettings.html" class="nav-item"><i class="fas fa-cog"></i><span class="nav-label">Commission Settings</span></a>
+         
+    </nav>
+    <div class="sidebar-footer">
+        <a href="../../frontend/admin/admin-login.html" class="nav-item" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i><span class="nav-label">Logout</span></a>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main-content" id="mainContent">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="topbar-icon-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <div class="topbar-title">
+                <h2>Admin Profile</h2>
+                <p>Manage your admin account settings</p>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <div style="position:relative;" id="notifContainer"></div>
+            <div style="position:relative;" id="profileDropdownContainer">
+                <button class="topbar-profile-btn" onclick="toggleProfileDropdown()">
+                    <div class="topbar-avatar">AD</div>
+                    <div class="topbar-user-info hidden sm:block">
+                        <p>Admin User</p>
+                        <p>Administrator</p>
+                    </div>
+                    <i class="fas fa-chevron-down" style="font-size:11px;color:var(--text-muted);"></i>
+                </button>
+                <div class="dropdown-menu" id="profileDropdown">
+                    <a href="admin-profile.html" class="dropdown-item"><i class="fas fa-user"></i>Profile</a>            
+                    <div class="dropdown-item"><i class="fas fa-cog"></i> Settings</div>
+                    <hr style="margin:4px 0;border-color:var(--border);">
+                    <div class="dropdown-item" style="color:#dc2626;" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PAGE BODY -->
+    <div class="page-body">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-header-text">
+                <h1>Admin Profile</h1>
+                <p>Manage your admin account settings</p>
+            </div>
+        </div>
+
+        <!-- Hero Card -->
+        <div class="profile-hero">
+            <div class="profile-hero-avatar">AD</div>
+            <div>
+                <div class="profile-hero-name">Admin User</div>
+                <div class="profile-hero-role">Administrator</div>
+                <div class="profile-hero-email">
+                    <i class="fas fa-envelope" style="font-size:12px;opacity:0.8;"></i>
+                    admin@kusina.university
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Information -->
+        <div class="profile-section">
+            <div class="profile-section-header">
+                <div class="profile-section-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <div class="profile-section-title">Profile Information</div>
+                    <div class="profile-section-subtitle">Update your display name and email address</div>
+                </div>
+            </div>
+            <div class="profile-section-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="profileName">Full Name</label>
+                        <input class="form-input" type="text" id="profileName" value="Admin User" placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="profileEmail">Email Address</label>
+                        <input class="form-input" type="email" id="profileEmail" value="admin@kusina.university" placeholder="your@email.com">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-outline btn-sm" onclick="adminProfile_resetForm()">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="adminProfile_saveInfo()">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="profile-section">
+            <div class="profile-section-header">
+                <div class="profile-section-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div>
+                    <div class="profile-section-title">Security Settings</div>
+                    <div class="profile-section-subtitle">Change your password</div>
+                </div>
+            </div>
+            <div class="profile-section-body">
+                <div style="max-width: 480px; display:flex; flex-direction:column; gap:14px;">
+
+                    <div class="form-group">
+                        <label class="form-label" for="currentPassword">Current Password</label>
+                        <div class="pw-wrap">
+                            <input class="form-input" type="password" id="currentPassword" placeholder="••••••••">
+                            <button class="pw-toggle" onclick="adminProfile_togglePw('currentPassword', this)" type="button">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="newPassword">New Password</label>
+                        <div class="pw-wrap">
+                            <input class="form-input" type="password" id="newPassword" placeholder="••••••••" oninput="adminProfile_checkStrength(this.value)">
+                            <button class="pw-toggle" onclick="adminProfile_togglePw('newPassword', this)" type="button">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="pw-hint">
+                            <i class="fas fa-info-circle" style="color:var(--primary-lighter);"></i>
+                            Must be at least 8 characters
+                        </span>
+                        <!-- Strength bar -->
+                        <div id="strengthBar" style="display:none;margin-top:6px;">
+                            <div style="height:4px;background:var(--border);border-radius:4px;overflow:hidden;">
+                                <div id="strengthFill" style="height:100%;width:0%;background:#ef4444;border-radius:4px;transition:all 0.3s ease;"></div>
+                            </div>
+                            <span id="strengthLabel" style="font-size:11px;color:var(--text-muted);margin-top:3px;display:block;"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                        <div class="pw-wrap">
+                            <input class="form-input" type="password" id="confirmPassword" placeholder="••••••••">
+                            <button class="pw-toggle" onclick="adminProfile_togglePw('confirmPassword', this)" type="button">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-actions" style="margin-top:6px;">
+                    <button class="btn btn-primary btn-sm" onclick="adminProfile_changePassword()">
+                        <i class="fas fa-key"></i> Change Password
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Logs -->
+        <div class="profile-section">
+            <div class="profile-section-header">
+                <div class="profile-section-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div>
+                    <div class="profile-section-title">Activity Logs</div>
+                    <div class="profile-section-subtitle">Recent admin actions</div>
+                </div>
+            </div>
+            <div class="profile-section-body" style="padding-top:8px;">
+                <ul class="activity-list" id="activityList"></ul>
+            </div>
+        </div>
+
+    </div><!-- /page-body -->
+</div><!-- /main-content -->
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+    <i id="toastIcon" class="fas fa-check-circle"></i>
+    <span id="toastMessage">Success!</span>
+</div>
+
+<script src="../../frontend/js/admin.js"></script>  
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - KU Admin</title>
+    <link rel="icon" type="image/png" href="../../frontend/images/KUlogo.jpg">
+    <link rel="stylesheet" href="../../frontend/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../frontend/js/admin.js"></script>   
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="sidebar-logo-icon"><img src="../../frontend/images/KUlogo.jpg" alt="KU Logo"></div>
+        <div class="logo-text"><h1>KU ADMIN</h1><p>Kusina University</p></div>
+    </div>
+    <div class="sidebar-user">
+        <div class="sidebar-user-avatar">AD</div>
+        <div class="user-info-text"><p>Admin User</p><p>Administrator</p></div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="../../frontend/admin/admin-dashboard.html"   class="nav-item"><i class="fas fa-th-large"></i><span class="nav-label">Dashboard</span></a>
+        <a href="../../frontend/admin/admin-affiliates.html"  class="nav-item"><i class="fas fa-users"></i><span class="nav-label">Affiliates</span></a>
+        <a href="../../frontend/admin/admin-links.html"       class="nav-item"><i class="fas fa-link"></i><span class="nav-label">Links</span></a>
+        <a href="../../frontend/admin/admin-payouts.html"     class="nav-item"><i class="fas fa-credit-card"></i><span class="nav-label">Payouts</span></a>
+        <a href="../../frontend/admin/admin-analytics.html"   class="nav-item active"><i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span></a>
+                        <a href="../../frontend/admin/admin-promocodes.html" class="nav-item"><i class="fas fa-ticket-alt"></i><span class="nav-label">Promo Codes</span></a>
+        <div class="sidebar-section-label" style="margin-top:8px;">Settings</div>
+        <a href="../../frontend/admin/admin-profile.html" class="nav-item"><i class="fas fa-user-circle"></i><span class="nav-label">Profile</span></a>
+        <a href="../../frontend/admin/admin-comsettings.html" class="nav-item"><i class="fas fa-cog"></i><span class="nav-label">Commission Settings</span></a>
+
+    </nav>
+    <div class="sidebar-footer">
+        <a href="../../frontend/admin/admin-login.html" class="nav-item" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i><span class="nav-label">Logout</span></a>
+    </div>
+</aside>
+
+<div class="main-content" id="mainContent">
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="topbar-icon-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <div class="topbar-title">
+                <h2>Analytics & Insights</h2>
+                <p>Full system performance metrics.</p>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <div style="position:relative;" id="notifContainer"></div>
+            <div style="position:relative;" id="profileDropdownContainer">
+                <button class="topbar-profile-btn" onclick="toggleProfileDropdown()">
+                    <div class="topbar-avatar">AD</div>
+                    <div class="topbar-user-info hidden sm:block"><p>Admin User</p><p>Administrator</p></div>
+                    <i class="fas fa-chevron-down" style="font-size:11px;color:var(--text-muted);"></i>
+                </button>
+                <div class="dropdown-menu" id="profileDropdown">
+                    <a href="admin-profile.html" class="dropdown-item"><i class="fas fa-user"></i>Profile</a>            
+                    <div class="dropdown-item"><i class="fas fa-cog"></i> Settings</div>
+                    <hr style="margin:4px 0;border-color:var(--border);">
+                    <div class="dropdown-item" style="color:#dc2626;" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body">
+        <div class="page-header">
+            <div class="page-header-text">
+                <h1>Analytics & Insights</h1>
+                <p>Full system performance metrics</p>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card card-p mb-6">
+            <div class="grid-2 gap-4">
+                <div>
+                    <label class="form-label">Date Range</label>
+                    <select class="form-select">
+                        <option>Last 7 Days</option>
+                        <option selected>Last 30 Days</option>
+                        <option>Last 90 Days</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">Affiliate</label>
+                    <select class="form-select">
+                        <option selected>All Affiliates</option>
+                        <option>Maria Santos</option>
+                        <option>Juan Dela Cruz</option>
+                        <option>Ana Rodriguez</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid-4 mb-6">
+            <div class="stat-card">
+                <div class="stat-icon gold"><i class="fas fa-peso-sign"></i></div>
+                <div class="stat-label">Total Revenue</div>
+                <div class="stat-value">₱1.14M</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +18.5%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon light"><i class="fas fa-mouse-pointer"></i></div>
+                <div class="stat-label">Total Clicks</div>
+                <div class="stat-value">124,583</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +12.3%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon pale"><i class="fas fa-percent"></i></div>
+                <div class="stat-label">Conversion Rate</div>
+                <div class="stat-value">3.08%</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +0.5%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+                <div class="stat-label">Active Affiliates</div>
+                <div class="stat-value">1,247</div>
+                <div class="stat-change up"><i class="fas fa-arrow-up"></i> +8.2%</div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid-2 mb-6">
+            <div class="card card-p">
+                <div class="section-title mb-4">Monthly Revenue & Conversions</div>
+                <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+            </div>
+            <div class="card card-p">
+                <div class="section-title mb-4">Traffic Sources</div>
+                <div class="chart-wrap"><canvas id="trafficChart"></canvas></div>
+            </div>
+            <div class="card card-p">
+                <div class="section-title mb-4">Device Breakdown</div>
+                <div class="chart-wrap"><canvas id="deviceChart"></canvas></div>
+            </div>
+            <div class="card card-p">
+                <div class="section-title mb-4">Conversion Funnel</div>
+                <div class="chart-wrap"><canvas id="funnelChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <i id="toastIcon" class="fas fa-check-circle"></i>
+    <span id="toastMessage">Success!</span>
+</div>
+
+<script src="../../frontend/js/admin.js"></script>  
+<script>
+    window.addEventListener('load', () => initAnalyticsCharts());
+</script>
+</body>
+</html>

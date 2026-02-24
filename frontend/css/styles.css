@@ -1,0 +1,89 @@
+/* ── Scrolled navbar links ── */
+.nav-link-scrolled {
+  color: #590C70 !important; 
+  transition: all 0.3s ease; 
+}
+  /* ── Base ── */
+body { font-family: 'Poppins', sans-serif; }
+
+    /* ── Page background (KU theme: ku-purple, ku-purple-dark, ku-deep) ── */
+.body-bg {
+    /* "to top right" moves the gradient diagonally */
+    background: linear-gradient(to top left, #590c7077, #ad47cc77), 
+                url('../../frontend/images/kusina_icon.jpg');
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    
+    /* Your original KU theme fallback */
+    background-color: #590C70; 
+    
+    min-height: 100vh;
+}
+    
+    /* ── Card ── */
+    .card {
+      box-shadow: 0 24px 64px rgba(59,7,100,0.55);
+    }
+
+    /* ── Logo icon (ku-purple to ku-purple-mid) ── */
+    .logo-icon {
+      background: linear-gradient(145deg, #590C70, #824893);
+      box-shadow: 0 8px 20px rgba(89,12,112,0.45);
+    }
+
+    /* ── Input focus ring (ku-purple) ── */
+    .ku-input:focus {
+      border-color: #590C70;
+      box-shadow: 0 0 0 3px rgba(89,12,112,0.12);
+      background: #fff;
+      outline: none;
+    }
+
+    /* ── Sign-in button (ku-purple to ku-purple-dark, like index CTA) ── */
+    .btn-signin {
+      background: linear-gradient(135deg, #590C70, #420954);
+      box-shadow: 0 4px 18px rgba(89,12,112,0.4);
+    }
+
+    /* ── Spinner (shown via .loading toggled by JS) ── */
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto;
+    }
+    .btn-primary.loading .btn-text { display: none; }
+    .btn-primary.loading .spinner  { display: block; }
+
+    /* ── Toast (ku-purple-dark) ── */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-80px);
+      background: #420954;
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      z-index: 200;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Help button ── */
+    .help-btn {
+      background: rgba(255,255,255,0.15);
+    }
+
+    

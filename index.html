@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="frontend/images/kusina_icon.png">
+    <title>Kusina University - Affiliate Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="frontend\css\styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="frontend\js\app.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-bg {
+            background: url('frontend/images/kusina_icon.jpg') center / cover no-repeat;
+        }
+        .cta-btn:hover { transform: scale(1.05); }
+        .feature-item:hover { transform: translateY(-10px); }
+    </style>
+</head>
+<body class="bg-white text-gray-800 leading-relaxed">
+    <!-- Header -->
+    <header class="bg-white/10 backdrop-blur-md py-4 fixed w-full top-0 z-50">
+        <div class="max-w-6xl mx-auto px-5">
+            <div class="flex justify-between items-center">
+                <img src="frontend/images/kusina_icon.png" alt="Kusina University Logo" class="h-14 rounded-full">
+                <nav class="hidden md:block">
+                    <ul class="flex items-center gap-0">
+                        <li><a href="#features" class="text-white font-medium ml-8 hover:text-ku-purple-light transition-colors duration-300">Earnings</a></li>
+                        <li><a href="#about"    class="text-white font-medium ml-8 hover:text-ku-purple-light transition-colors duration-300">About</a></li>
+                        <li><a href="#contact"  class="text-white font-medium ml-8 hover:text-ku-purple-light transition-colors duration-300">Contact</a></li>
+                        <li>
+                            <a href="frontend\affiliator\affiliator-login.html" class="ml-8 bg-ku-purple text-white font-semibold px-6 py-2.5 rounded-full hover:bg-ku-purple-dark transition-colors duration-300">
+                                Log In
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-bg relative pt-44 pb-32 text-center text-white">
+        <div class="absolute inset-0 bg-gradient-to-br from-ku-purple to-ku-purple-dark opacity-70 z-10"></div>
+        <div class="relative z-20 max-w-6xl mx-auto px-5">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-5">Empowering Caterers,<br>One Plate at a Time</h1>
+            <p class="text-lg text-white/90 max-w-2xl mx-auto">
+                Join our community of 375+ women-led food businesses. Promote our culinary programs and earn competitive commissions through our Affiliate Management System.
+            </p>
+            <a href="index.html" class="cta-btn inline-block mt-8 bg-white text-ku-purple font-bold text-lg px-10 py-4 rounded-full transition-all duration-300 hover:bg-ku-purple-light hover:text-white">
+                Become an Affiliate <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-5">
+            <h2 class="text-center text-4xl font-bold text-ku-purple mb-12">Why Partner With Us?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <div class="feature-item text-center p-10 rounded-2xl shadow-md bg-white transition-transform duration-300">
+                    <i class="fas fa-percentage text-5xl text-ku-purple-light mb-5 block"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">High Commissions</h3>
+                    <p class="text-gray-500 text-sm">Earn generous rewards for every successful referral to our culinary and management courses.</p>
+                </div>
+
+                <div class="feature-item text-center p-10 rounded-2xl shadow-md bg-white transition-transform duration-300">
+                    <i class="fas fa-chart-pie text-5xl text-ku-purple-light mb-5 block"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Real-time Tracking</h3>
+                    <p class="text-gray-500 text-sm">Monitor your performance, clicks, and earnings instantly through your personal dashboard.</p>
+                </div>
+
+                <div class="feature-item text-center p-10 rounded-2xl shadow-md bg-white transition-transform duration-300">
+                    <i class="fas fa-wallet text-5xl text-ku-purple-light mb-5 block"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Secure Payouts</h3>
+                    <p class="text-gray-500 text-sm">Reliable and timely payments processed directly through our secure management system.</p>
+                </div>
+
+                <div class="feature-item text-center p-10 rounded-2xl shadow-md bg-white transition-transform duration-300">
+                    <i class="fas fa-tools text-5xl text-ku-purple-light mb-5 block"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Marketing Tools</h3>
+                    <p class="text-gray-500 text-sm">Access exclusive banners, links, and resources to help you succeed as a KU partner.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20 bg-gray-50 text-center">
+        <div class="max-w-6xl mx-auto px-5">
+            <h2 class="text-4xl font-bold text-ku-purple mb-12">Empowering Women through Partnership</h2>
+            <p class="text-gray-600 max-w-3xl mx-auto mb-4">
+                The Affiliate Management System is a project for women by Kusina University. By joining, you support our mission of fostering culinary education and entrepreneurship across the Philippines.
+            </p>
+            <p class="text-gray-600 max-w-3xl mx-auto">
+                Our community in Davao City and beyond is built on the success of women-led food business owners. Together, we provide the tools for financial independence and professional growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-5">
+            <h2 class="text-4xl font-bold text-ku-purple mb-12 text-center">Get in Touch</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 text-lg mb-3">Contact</h3>
+                    <p class="text-gray-500 mb-2">Purok Sili, Brgy Gredu, Panabo City</p>
+                    <a href="mailto:kuchefs23@gmail.com" class="block text-gray-500 hover:text-ku-purple transition-colors mb-2">kuchefs23@gmail.com</a>
+                    <a href="http://www.kusinauniversity.com" target="_blank" class="block text-gray-500 hover:text-ku-purple transition-colors">www.kusinauniversity.com</a>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 text-lg mb-3">Quick Links</h3>
+                    <a href="#" class="block text-gray-500 hover:text-ku-purple transition-colors mb-2">KU Learning Portal</a>
+                    <a href="#" class="block text-gray-500 hover:text-ku-purple transition-colors mb-2">Member Enrollment</a>
+                    <a href="#" class="block text-gray-500 hover:text-ku-purple transition-colors">Affiliate Terms</a>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-gray-800 text-lg mb-3">Engage</h3>
+                    <div class="flex justify-center gap-5 mt-4">
+                        <a href="#" target="_blank" class="text-ku-purple text-2xl hover:text-ku-purple-mid transition-colors">
+                            <i class="fab fa-facebook"></i> <span class="text-sm font-medium">/KusinaUniversity</span>
+                        </a>
+                        <a href="#" target="_blank" class="text-ku-purple text-2xl hover:text-ku-purple-mid transition-colors">
+                            <i class="fab fa-tiktok"></i> <span class="text-sm font-medium">#KuChefs</span>
+                        </a>
+                    </div>
+                    <p class="mt-5 text-sm text-gray-400">A Project for Women by Kusina University</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="py-20 bg-gray-50 text-center">
+        <div class="max-w-6xl mx-auto px-5">
+            <h2 class="text-4xl font-bold text-ku-purple mb-12">Trusted by the KU Community</h2>
+            <div class="flex justify-center gap-16 flex-wrap">
+                <div class="flex flex-col items-center gap-2 font-semibold text-ku-purple">
+                    <i class="fas fa-shield-alt text-3xl text-ku-purple-mid"></i>
+                    <span>Secure Platform</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 font-semibold text-ku-purple">
+                    <i class="fas fa-headset text-3xl text-ku-purple-mid"></i>
+                    <span>Affiliate Support</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 font-semibold text-ku-purple">
+                    <i class="fas fa-check-circle text-3xl text-ku-purple-mid"></i>
+                    <span>Verified System</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ku-purple text-white py-10 text-center leading-loose">
+        <div class="max-w-6xl mx-auto px-5">
+            <p>© 2026 Kusina University Affiliate Management System</p>
+            <p>Need assistance? <a href="mailto:kuchefs23@gmail.com" class="text-ku-purple-light hover:text-ku-purple-pale transition-colors">Contact Support</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

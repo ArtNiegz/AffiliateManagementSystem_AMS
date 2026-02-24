@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Settings - KU Admin</title>
+    <link rel="icon" type="image/png" href="../../frontend/images/KUlogo.jpg">
+    <link rel="stylesheet" href="../../frontend/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../../frontend/js/admin.js"></script>   
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="sidebar-logo-icon"><img src="../../frontend/images/KUlogo.jpg" alt="KU Logo"></div>
+        <div class="logo-text"><h1>KU ADMIN</h1><p>Kusina University</p></div>
+    </div>
+    <div class="sidebar-user">
+        <div class="sidebar-user-avatar">AD</div>
+        <div class="user-info-text"><p>Admin User</p><p>Administrator</p></div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Main Menu</div>
+        <a href="../../frontend/admin/admin-dashboard.html"   class="nav-item"><i class="fas fa-th-large"></i><span class="nav-label">Dashboard</span></a>
+        <a href="../../frontend/admin/admin-affiliates.html"  class="nav-item"><i class="fas fa-users"></i><span class="nav-label">Affiliates</span></a>
+        <a href="../../frontend/admin/admin-links.html"       class="nav-item"><i class="fas fa-link"></i><span class="nav-label">Links</span></a>
+        <a href="../../frontend/admin/admin-payouts.html"     class="nav-item"><i class="fas fa-credit-card"></i><span class="nav-label">Payouts</span></a>
+        <a href="../../frontend/admin/admin-analytics.html"   class="nav-item"><i class="fas fa-chart-line"></i><span class="nav-label">Analytics</span></a>
+                        <a href="../../frontend/admin/admin-promocodes.html" class="nav-item"><i class="fas fa-ticket-alt"></i><span class="nav-label">Promo Codes</span></a>
+        <div class="sidebar-section-label" style="margin-top:8px;">Settings</div>
+        <a href="../../frontend/admin/admin-profile.html" class="nav-item"><i class="fas fa-user-circle"></i><span class="nav-label">Profile</span></a>
+        <a href="../../frontend/admin/admin-comsettings.html" class="nav-item active"><i class="fas fa-cog"></i><span class="nav-label">Commission Settings</span></a>
+
+    </nav>
+    <div class="sidebar-footer">
+        <a href="../../frontend/admin/admin-login.html" class="nav-item" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i><span class="nav-label">Logout</span></a>
+    </div>
+</aside>
+
+<div class="main-content" id="mainContent">
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="topbar-icon-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <div class="topbar-title">
+                <h2>Commission Settings</h2>
+                <p>Control earnings logic and commission rates.</p>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <div style="position:relative;" id="notifContainer"></div>
+            <div style="position:relative;" id="profileDropdownContainer">
+                <button class="topbar-profile-btn" onclick="toggleProfileDropdown()">
+                    <div class="topbar-avatar">AD</div>
+                    <div class="topbar-user-info hidden sm:block"><p>Admin User</p><p>Administrator</p></div>
+                    <i class="fas fa-chevron-down" style="font-size:11px;color:var(--text-muted);"></i>
+                </button>
+                <div class="dropdown-menu" id="profileDropdown">
+                    <a href="admin-profile.html" class="dropdown-item"><i class="fas fa-user"></i>Profile</a>            
+                    <div class="dropdown-item"><i class="fas fa-cog"></i> Settings</div>
+                    <hr style="margin:4px 0;border-color:var(--border);">
+                    <div class="dropdown-item" style="color:#dc2626;" onclick="handleLogout(event)"><i class="fas fa-sign-out-alt"></i> Logout</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body">
+        <div class="page-header">
+            <div class="page-header-text">
+                <h1>Commission Settings</h1>
+                <p>Control earnings logic and commission rates</p>
+            </div>
+        </div>
+
+        <!-- Default Rate -->
+        <div class="card card-p mb-6">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="stat-icon purple" style="margin-bottom:0;"><i class="fas fa-calculator"></i></div>
+                <div>
+                    <div style="font-size:16px;font-weight:700;color:var(--text-dark);">Default Commission Rate</div>
+                    <div style="font-size:13px;color:var(--text-muted);">Applied to all new affiliates</div>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-end gap-4">
+                <div style="flex:1;min-width:200px;">
+                    <label class="form-label">Commission Rate (%)</label>
+                    <input id="defaultRate" type="number" step="0.1" value="18" class="form-input">
+                </div>
+                <button onclick="saveDefaultRate()" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+            </div>
+        </div>
+
+        <!-- Per-Affiliate Rates -->
+        <div class="card card-p mb-6">
+            <div class="section-title mb-4">Affiliate-Specific Rates</div>
+            <div class="overflow-x-auto">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Affiliate Name</th>
+                            <th>Commission Rate (%)</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ratesTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bonus Campaign -->
+        <div class="card card-p">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="stat-icon gold" style="margin-bottom:0;"><i class="fas fa-star"></i></div>
+                <div>
+                    <div style="font-size:16px;font-weight:700;color:var(--text-dark);">Bonus Campaign</div>
+                    <div style="font-size:13px;color:var(--text-muted);">Create limited-time commission bonuses</div>
+                </div>
+            </div>
+
+            <div class="grid-2 mb-4" style="gap:16px;">
+                <div>
+                    <label class="form-label">Campaign Name</label>
+                    <input id="campaignName" type="text" class="form-input" placeholder="Summer Bonus 2026">
+                </div>
+                <div>
+                    <label class="form-label">Bonus Rate (%)</label>
+                    <input id="campaignRate" type="number" step="0.1" class="form-input" placeholder="25">
+                </div>
+                <div>
+                    <label class="form-label">Start Date</label>
+                    <input id="campaignStart" type="date" class="form-input">
+                </div>
+                <div>
+                    <label class="form-label">End Date</label>
+                    <input id="campaignEnd" type="date" class="form-input">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 mb-5">
+                <input type="checkbox" id="activateNow" style="width:16px;height:16px;accent-color:var(--primary);">
+                <label for="activateNow" style="font-size:13px;color:var(--text-body);cursor:pointer;">Activate campaign immediately</label>
+            </div>
+
+            <button onclick="createCampaign()" class="btn btn-primary">
+                <i class="fas fa-star"></i> Create Campaign
+            </button>
+        </div>
+
+        <!-- Specific Bonus Campaign -->
+<div class="card card-p mt-6">
+    <div class="flex items-center gap-3 mb-5">
+        <div class="stat-icon light" style="margin-bottom:0;">
+            <i class="fas fa-ticket-alt"></i>
+        </div>
+        <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text-dark);">
+                Specific Bonus Campaign
+            </div>
+            <div style="font-size:13px;color:var(--text-muted);">
+                Create limited-time promo codes for merchants, locations, or events
+            </div>
+        </div>
+    </div>
+
+    <!-- Selection Type -->
+    <div class="grid-2 mb-4" style="gap:16px;">
+        <div>
+            <label class="form-label">Apply To</label>
+            <select id="promoTargetType" class="form-select" onchange="handleTargetChange()">
+                <option value="">Select Type</option>
+                <option value="merchant">Merchant</option>
+                <option value="location">Location</option>
+                <option value="event">Event</option>
+            </select>
+        </div>
+
+<div id="targetDropdownWrap" style="display:none;">
+    <label class="form-label">Select Option</label>
+    <select id="promoTargetValue" class="form-select"></select>
+</div>
+
+<!-- Custom Keyword Input (Only for Merchant) -->
+<div id="customKeywordWrap" style="display:none; margin-top:12px;">
+    <label class="form-label">Custom Keyword (Merchant Only)</label>
+    <input 
+        id="customKeyword" 
+        type="text" 
+        class="form-input" 
+        placeholder="kusina.firstanniversary">
+</div>
+
+    </div>
+
+    <!-- Promo Code -->
+    <div class="grid-2 mb-4" style="gap:16px;">
+        <div>
+            <label class="form-label">Generated Promo Code</label>
+            <div class="flex gap-2">
+                <input id="generatedCode" type="text" class="form-input" readonly placeholder="KUSINA10">
+                <button type="button" class="btn btn-outline btn-sm" onclick="generatePromoCode()">
+                    Generate
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <label class="form-label">Discount Type</label>
+            <select id="discountType" class="form-select">
+                <option value="percentage">Percentage (%)</option>
+                <option value="fixed">Fixed Amount (₱)</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="form-label">Discount Value</label>
+            <input id="discountValue" type="number" class="form-input" placeholder="10">
+        </div>
+
+        <div>
+            <label class="form-label">Usage Limit (Optional)</label>
+            <input id="usageLimit" type="number" class="form-input" placeholder="1 use per customer">
+        </div>
+
+        <div>
+            <label class="form-label">Start Date</label>
+            <input id="promoStartDate" type="date" class="form-input">
+        </div>
+
+        <div>
+            <label class="form-label">End Date</label>
+            <input id="promoEndDate" type="date" class="form-input">
+        </div>
+    </div>
+
+    <button onclick="createSpecificPromo()" class="btn btn-primary">
+        <i class="fas fa-plus-circle"></i> Create Promo Code
+    </button>
+</div>
+
+    </div>
+</div>
+
+<div class="toast" id="toast">
+    <i id="toastIcon" class="fas fa-check-circle"></i>
+    <span id="toastMessage">Success!</span>
+</div>
+<script>
+const merchants = [
+    "Kusina University",
+    "Chef Mateo Catering",
+    "Lutong Bahay Express",
+    "Fiesta Flavors Catering",
+    "Urban Spoon Events",
+    "Golden Plate Catering",
+    "Savory Moments Kitchen"
+];
+
+const locations = [
+    "Manila",
+    "Quezon City",
+    "Makati",
+    "Taguig",
+    "Cebu",
+    "Davao",
+    "Baguio"
+];
+
+const events = [
+    "Wedding Expo 2026",
+    "Food Festival 2026",
+    "Graduation Season Promo",
+    "Corporate Event Week",
+    "Christmas Catering Sale",
+    "New Year Feast 2027",
+    "Valentine's Special"
+];
+
+function handleTargetChange() {
+    const type = document.getElementById("promoTargetType").value;
+    const dropdownWrap = document.getElementById("targetDropdownWrap");
+    const dropdown = document.getElementById("promoTargetValue");
+    const customKeywordWrap = document.getElementById("customKeywordWrap");
+
+    dropdown.innerHTML = "";
+
+    if (!type) {
+        dropdownWrap.style.display = "none";
+        customKeywordWrap.style.display = "none";
+        return;
+    }
+
+    dropdownWrap.style.display = "block";
+
+    let data = [];
+    if (type === "merchant") {
+        data = merchants;
+        customKeywordWrap.style.display = "block"; // show custom input
+    } 
+    else {
+        customKeywordWrap.style.display = "none";
+    }
+
+    if (type === "location") data = locations;
+    if (type === "event") data = events;
+
+    data.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item;
+        option.textContent = item;
+        dropdown.appendChild(option);
+    });
+}
+
+function generatePromoCode() {
+    const type = document.getElementById("promoTargetType").value;
+    const selectedValue = document.getElementById("promoTargetValue").value;
+    const customKeyword = document.getElementById("customKeyword").value;
+    const codeInput = document.getElementById("generatedCode");
+
+    if (!type || !selectedValue) {
+        showToast("Please select Apply To option first.", "warning");
+        return;
+    }
+
+    let baseCode = "";
+
+    // MERCHANT LOGIC
+    if (type === "merchant") {
+        if (!customKeyword) {
+            showToast("Please enter a custom keyword for merchant.", "warning");
+            return;
+        }
+
+        baseCode = customKeyword;
+    }
+
+    // EVENT LOGIC
+    if (type === "event") {
+        baseCode = selectedValue;
+    }
+
+    // LOCATION LOGIC
+    if (type === "location") {
+        baseCode = selectedValue;
+    }
+
+    // Clean text → uppercase + remove spaces
+    baseCode = baseCode
+        .replace(/\s+/g, "") 
+        .replace(/[^a-zA-Z0-9.]/g, "")
+        .toUpperCase();
+
+    // Unique random number
+    const uniqueNumber = Math.floor(Math.random() * 90) + 10;
+
+    codeInput.value = baseCode + uniqueNumber;
+}
+
+function createSpecificPromo() {
+    const code = document.getElementById("generatedCode").value;
+    const type = document.getElementById("promoTargetType").value;
+    const target = document.getElementById("promoTargetValue").value;
+    const discountType = document.getElementById("discountType").value;
+    const discountValue = document.getElementById("discountValue").value;
+    const usageLimit = document.getElementById("usageLimit").value;
+    const startDate = document.getElementById("promoStartDate").value;
+    const endDate = document.getElementById("promoEndDate").value;
+
+    if (!code || !discountValue || !startDate || !endDate) {
+        showToast("Please complete all required fields.", "warning");
+        return;
+    }
+
+    const newPromo = {
+        code,
+        type,
+        target,
+        discountType,
+        discountValue,
+        usageLimit,
+        startDate,
+        endDate
+    };
+
+    const promos = JSON.parse(localStorage.getItem("ku_promos")) || [];
+    promos.push(newPromo);
+    localStorage.setItem("ku_promos", JSON.stringify(promos));
+
+    showToast("Promo Code Created & Saved!", "success");
+
+    setTimeout(() => {
+        window.location.href = "admin-promocodes.html";
+    }, 1200);
+}
+
+</script>
+
+
+<script src="../../frontend/js/admin.js"></script>  
+<script>
+    document.addEventListener('DOMContentLoaded', () => renderRates());
+</script>
+</body>
+</html>
